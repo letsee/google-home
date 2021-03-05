@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Letsee AR Manual Demo - Google Home Mini</title>
+    <meta content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <script src="https://s3.ap-northeast-2.amazonaws.com/letsee-dev/webar/Letsee.0.9.10.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.min.css"/>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <style media="place" type="text/css">
+        #clickGuide {
+            -letsee-target: uri('top-marker.json');
+            -letsee-position: coords(0, -30, 0);
+        }
+        #topGuide {
+            -letsee-target: uri('top-marker.json');
+            -letsee-position: coords(0, 0, 0);
+        }
+        #bottomGuide {
+            -letsee-target: uri('bottom-marker.json');
+            -letsee-position: coords(0, 0, 0);
+        }
+    </style>
+</head>
+<body>
+
+<div id="markerLoader">
+    <div class="box">
+        <img src="./assets/marker.svg" id="topMarker">
+        <img src="./assets/recognize-marker-signal.svg" id="bottomMarker">
+    </div>
+</div>
+
+<div id="clickGuide">
+    <div id="leftHand" class="inner">
+        <img src="./assets/hand-left-up.svg" class="up">
+        <img src="./assets/hand-left-down.svg" class="down">
+    </div>
+    <div id="rightHand" class="inner">
+        <img src="./assets/hand-right-up.svg" class="up">
+        <img src="./assets/hand-right-down.svg" class="down">
+    </div>
+</div>
+
+<div id="topGuide">
+
+    <div class="guideCircle">
+
+        <div class="text"><span>Tap Left</span></div>
+        <div class="volume">
+            <img src="./assets/volume-1.svg" class="vol1">
+            <img src="./assets/volume-2.svg" class="vol2">
+            <img src="./assets/volume-3.svg" class="vol3">
+        </div>
+        <div class="leftBtn"></div>
+        <div class="rightBtn"></div>
+    </div>
+</div>
+<div id="bottomGuide">
+    <div class="step1">
+        <div class="reset">Reset Button</div>
+        <div class="mike">Mike switch</div>
+        <div class="power">Power</div>
+        <div class="usb"><img src="./assets/usb-02.png" alt="USB Power"></div>
+    </div>
+</div>
+<!-- Title in header -->
+<header>
+    <div id="topHeaderSlider">
+        <div class="item">
+            <div class="header">
+                <h2>Speaker Information</h2>
+            </div>
+            <div class="progress">
+                <ul>
+                    <li class="active">Step 1</li>
+                    <li class="">Step 2</li>
+                    <li class="">Step 3</li>
+                    <li class="">Step 4</li>
+                </ul>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header">
+                <h2>Speaker Information</h2>
+            </div>
+            <div class="progress">
+                <ul>
+                    <li class="active">Step 1</li>
+                    <li class="active">Step 2</li>
+                    <li class="">Step 3</li>
+                    <li class="">Step 4</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="bottomHeaderSlider">
+        <div class="item">
+            <div class="header">
+                <h2>Speaker Information</h2>
+            </div>
+            <div class="progress">
+                <ul>
+                    <li class="active">Step 1</li>
+                    <li class="active">Step 2</li>
+                    <li class="active">Step 3</li>
+                    <li class="">Step 4</li>
+                </ul>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header">
+                <h2>Connecting Power</h2>
+            </div>
+            <div class="progress">
+                <ul>
+                    <li class="active">Step 1</li>
+                    <li class="active">Step 2</li>
+                    <li class="active">Step 3</li>
+                    <li class="active">Step 4</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Bottom slider -->
+<div class="sliderContent">
+    <div class="sliderItem" id="topSlide">
+        <div class="item step1" data-title="Checking speaker">
+            <div class="inner">
+                <h5>Long press</h5>
+                <div class="content">
+                    <ul>
+                        <li>Play / pause</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="item step2" data-title="Checking power">
+            <div class="inner">
+                <h5>Long press</h5>
+                <div class="content">
+                    <ul>
+                        <li>Play / pause</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sliderItem" id="bottomSlide">
+        <div class="item step1" data-title="Checking speaker">
+            <div class="inner">
+
+                <div class="content">
+                    <ul>
+                        <li><h5>Reset button</h5>
+                            Press for more than 3 seconds to reset.</li>
+                        <li><h5>Mic button</h5>To turn on/off the microphone,<br>
+                            The switch.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="item step2" data-title="Checking power">
+
+        </div>
+    </div>
+</div>
+
+<div class="finalStep" id="top">
+    <div>
+        Step 2 finished.<br>
+        Please press the Next button.<br>
+        <a href="#" id="gotoStep3">Next</a>
+    </div>
+</div>
+<div class="finalStep" id="bottom">
+    <div>
+        Step 3 finished.<br>
+        Please press the Next button.<br>
+        <a href="#" id="done">Next</a>
+    </div>
+</div>
+<div id="applink">
+    <div>
+        Please set up your device.<br>
+        -Thank you-
+    </div>
+    <a href="#" id="appLinkAddress" target="_blank">
+        <img src="./assets/app_link.png" class="icon">
+        <img src="./assets/download.svg" class="arrow">
+    </a>
+</div>
+
+
+<script type="text/javascript">
+    let initTopFlag = false;
+    let checkTopFinal = false;
+    let checkTopSwipe = true;
+    let currentStep = 0;
+    $('#topSlide').on('beforeChange', function(event, slick, direction){
+        console.log('before');
+        checkTopSwipe = true;
+    });
+    $('#topSlide').on('swipe', function(event, slick, direction){
+        checkTopFinal = slick.currentSlide >= slick.slideCount - slick.options.slidesToShow;
+        if(checkTopFinal && !checkTopSwipe) {
+            $('.finalStep#top').fadeIn(100);
+        }
+        if (slick.currentSlide === 1) setRightBtn();
+        if (slick.currentSlide === 0) setLeftBtn();
+    });
+    $('#topSlide').on('afterChange', function(event, slick, direction){
+        checkTopSwipe = false;
+        console.log('after')
+    });
+    $('#topSlide').on('init', function(event, slick) {
+        $('#topHeaderSlider')
+            .addClass('on')
+    });
+    function setTopSlider () {
+        $('#topHeaderSlider').show();
+        $('#topHeaderSlider').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: false,
+            fade: true,
+            infinite: false,
+            asNavFor: '#topSlide'
+        })
+        $('#topSlide').show();
+        $('#topSlide').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: true,
+            asNavFor: '#topHeaderSlider',
+            infinite: false
+        });
+
+    }
+    // setTopSlider();
+
+
+
+    let initBottomFlag = false;
+    let checkBottomFinal = false;
+    let checkBottomSwipe = true;
+    $('#bottomSlide').on('beforeChange', function(event, slick, direction){
+        console.log('before');
+        checkBottomSwipe = true;
+    });
+    $('#bottomSlide').on('swipe', function(event, slick, direction){
+        checkBottomFinal = slick.currentSlide >= slick.slideCount - slick.options.slidesToShow;
+        if(checkBottomFinal && !checkBottomSwipe) {
+            $('.finalStep#bottom').fadeIn(100);
+        }
+        if (slick.currentSlide === 1) {
+            $('#bottomGuide .reset').hide();
+            $('#bottomGuide .mike').hide();
+            $('#bottomGuide .power').show();
+            $('#bottomGuide .usb').show();
+        }
+        if (slick.currentSlide === 0) {
+            $('#bottomGuide .reset').show();
+            $('#bottomGuide .mike').show();
+            $('#bottomGuide .usb').hide();
+            $('#bottomGuide .power').hide();
+        }
+    });
+    $('#bottomSlide').on('afterChange', function(event, slick, direction){
+        checkBottomSwipe = false;
+        console.log('after')
+    });
+    $('#bottomSlide').on('init', function(event, slick) {
+        $('#bottomHeaderSlider')
+            .addClass('on')
+            .delay(50)
+            .queue(function(next) {
+                // $('#bottomSlide').addClass('on');
+            });
+    });
+    function setBottomSlider () {
+        $('#bottomSlide').show();
+        $('#bottomSlide').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: true,
+            asNavFor: '#bottomHeaderSlider',
+            infinite: false
+        });
+        $('#bottomHeaderSlider').show();
+        $('#bottomHeaderSlider').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: false,
+            fade: true,
+            infinite: false,
+            asNavFor: '#bottomSlide'
+        })
+    }
+    // setBottomSlider();
+
+    let leftBtnFlag = false;
+    let rightBtnFlag = false;
+    let currentVol = 2;
+    let volEle = $('.volume img');
+
+    function setSliderPosition() {
+        $('#topSlide').css('top', window.innerHeight - 200)
+        $('#bottomSlide').css('top', window.innerHeight - 200)
+    }
+    setSliderPosition();
+    window.addEventListener('orientationchange', () => {
+        const timer = setTimeout(function() {
+            setSliderPosition();
+            clearTimeout(timer);
+        }, 1500);
+    });
+
+
+    function setRightBtn() {
+        rightBtnFlag = false;
+        $('.guideCircle .text').html('Tap Right');
+        toggleGuideText(false);
+        $('.leftBtn').hide();
+        $('#leftHand').hide();
+        $('.rightBtn').show();
+        $('#rightHand').show();
+    }
+    function setLeftBtn() {
+        leftBtnFlag = false;
+        $('.guideCircle .text').html('Tap Left');
+        toggleGuideText(false);
+        $('.leftBtn').show();
+        $('#leftHand').show();
+        $('.rightBtn').hide();
+        $('#rightHand').hide();
+    }
+
+    function toggleGuideText(state) {
+        if(state) {
+            $('.guideCircle .text').fadeOut(500);
+            $('.guideCircle .volume').fadeIn(500);
+            $('#leftHand').fadeOut(500);
+            $('#rightHand').fadeOut(500);
+        } else {
+            $('.guideCircle .text').fadeIn(500);
+            $('.guideCircle .volume').fadeOut(500);
+            $('#leftHand').fadeIn(500);
+            $('#rightHand').fadeIn(500);
+        }
+
+    }
+    function volUp() {
+        if (!rightBtnFlag) {
+            rightBtnFlag = true;
+            toggleGuideText(true);
+            $('#topSlide').addClass('on');
+        }
+        if(currentVol < 2) {
+            let targetVolume = volEle[currentVol+1];
+            $(targetVolume).fadeIn(500);
+            currentVol++;
+            console.log(`vol: ${currentVol}`)
+        } else {
+            console.log('max')
+        }
+
+    }
+    function volDown() {
+        if (!leftBtnFlag) {
+            leftBtnFlag = true;
+            toggleGuideText(true);
+            $('#topSlide').addClass('on');
+        }
+        if(currentVol >= 0) {
+            let targetVolume = volEle[currentVol];
+            $(targetVolume).fadeOut(500);
+            currentVol--;
+            console.log(`vol: ${currentVol}`)
+        } else {
+            console.log('min')
+        }
+    }
+    $('.leftBtn').click(()=>{
+        volDown();
+    })
+    $('.rightBtn').click(()=>{
+        volUp();
+    })
+
+    let slideFlag = false;
+
+    $('#gotoStep3').click(function(e) {
+        e.preventDefault();
+        setNextSlide();
+    });
+    $('#done').click(function(e) {
+        e.preventDefault();
+        $('#bottom').fadeOut(500);
+        $('#applink').fadeIn(500);
+
+    })
+    function setNextSlide() {
+        $('#markerLoader').show();
+        $('#topHeaderSlider').slick('unslick').hide();
+        $('#topSlide').slick('unslick').hide();
+        slideFlag = true;
+        $('#top').fadeOut(500);
+        $('#topGuide').fadeOut(500);
+        setBottomSlider();
+        $('#topGuide').hide();
+        $('#clickGuide').hide();
+        currentStep = 1;
+    }
+
+    function getMobileOperatingSystem() {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        let andLink = 'https://play.google.com/store/apps/details?id=com.google.android.apps.chromecast.app'
+        let iosLink = 'https://itunes.apple.com/gb/app/google-home/id680819774'
+
+        // Windows Phone must come first because its UA also contains "Android"
+        if (/windows phone/i.test(userAgent)) {
+            return "window";
+        }
+
+        if (/android/i.test(userAgent)) {
+            $('#appLinkAddress').attr('href',andLink)
+            return "android";
+        }
+
+        // iOS detection from: http://stackoverflow.com/a/9039885/177710
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            $('#appLinkAddress').attr('href',iosLink)
+            return "ios";
+        }
+        return "unknown";
+    }
+    getMobileOperatingSystem();
+    const config = {
+        "appKey": "abdc9d670bc3b103374306761da7f20f49f7f23ac57b39d012338fa849229a0f",
+        "trackerType": "MARKER"
+    };
+
+    const app = new Letsee(config);
+    if(app !== null && typeof app !== 'undefined') {
+        LetseeEngine.addEventListener('trackstart', e => {
+            $('#markerLoader').hide();
+            if(!initTopFlag) {
+                setTopSlider();
+                initTopFlag = true;
+            };
+            if (!initBottomFlag &&  e.target.uri === 'bottom-marker.json') {
+                $('#bottomSlide').addClass('on');
+                initBottomFlag = true;
+            }
+        });
+        LetseeEngine.addEventListener('trackmove', e => {
+            const uri = e.target.uri;
+            if (uri === 'top-marker.json') {
+                if(currentStep === 0)
+                {
+                    $('#topGuide').show();
+                    $('#clickGuide').show();
+                    $('#topMarker').show();
+                    $('#bottomGuide').hide();
+                    $('#bottomMarker').hide();
+                } else {
+                    $('#topGuide').hide();
+                    $('#clickGuide').hide();
+                    $('#topMarker').show();
+                    $('#bottomGuide').hide();
+                    $('#bottomMarker').hide();
+                }
+            }
+            if (uri === 'bottom-marker.json') {
+                if (currentStep === 1) {
+                    $('#topGuide').hide();
+                    $('#clickGuide').hide();
+                    $('#topMarker').hide();
+                    $('#bottomGuide').show();
+                    $('#bottomMarker').hide();
+                } else {
+                    $('#topGuide').hide();
+                    $('#clickGuide').hide();
+                    $('#topMarker').show();
+                    $('#bottomGuide').hide();
+                    $('#bottomMarker').hide();
+                }
+            }
+        });
+        LetseeEngine.addEventListener('trackend', e => {
+            $('#markerLoader').show();
+        });
+        app.addEventListener('app_status', e => {
+            console.log(e)
+        });
+    }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/screenfull.js/4.2.0/screenfull.min.js"></script>
+<script>let fs=!1;document.documentElement.addEventListener("click",()=>{screenfull.enabled&&!fs&&(screenfull.request(),fs=!0)});</script>
+</body>
+</html>

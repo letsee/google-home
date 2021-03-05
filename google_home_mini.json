@@ -1,0 +1,11 @@
+{
+	"uri":"google_home_mini.json",
+	"name":"Google Home Mini",
+	"size":{
+		"width": 115,
+		"height": 115
+	},
+	"scale": 0.5,
+	"image":"./package.jpg",
+	"information":{}
+}

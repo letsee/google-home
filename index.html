@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Letsee AR Manual Demo - Google Home Mini 1.0</title>
+  <meta content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <script src="https://s3.ap-northeast-2.amazonaws.com/letsee-dev/webar/Letsee.0.9.10.google.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css"/>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.min.css"/>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <style media="place" type="text/css">
+    #container {
+      -letsee-target: uri('google_home_mini.json');
+      -letsee-position: coords(0, 0, 0);
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <div id="arGuide">
+    <div class="step1">
+      <img src="./assets/speaker.png">
+    </div>
+    <div class="step2">
+      <img src="./assets/socket.png">
+    </div>
+    <div class="step3">
+      <img src="./assets/guide.png">
+    </div>
+    <div class="step4">
+      <img src="./assets/13-1.svg">
+    </div>
+  </div>
+</div>
+<!-- Title in header -->
+<header>
+  <div id="headerSlider">
+    <div class="item">
+      <div class="header">
+        <h2>Step 1</h2>
+      </div>
+      <div class="progress">
+        <ul>
+          <li class="active">Step 1</li>
+          <li class="">Step 2</li>
+          <li class="">Step 3</li>
+          <li class="">Step 4</li>
+        </ul>
+      </div>
+    </div>
+    <div class="item">
+      <div class="header">
+        <h2>Step 2</h2>
+      </div>
+      <div class="progress">
+        <ul>
+          <li class="active">Step 1</li>
+          <li class="active">Step 2</li>
+          <li class="">Step 3</li>
+          <li class="">Step 4</li>
+        </ul>
+      </div>
+    </div>
+    <div class="item">
+      <div class="header">
+        <h2>Step 3</h2>
+      </div>
+      <div class="progress">
+        <ul>
+          <li class="active">Step 1</li>
+          <li class="active">Step 2</li>
+          <li class="active">Step 3</li>
+          <li class="">Step 4</li>
+        </ul>
+      </div>
+    </div>
+    <div class="item">
+      <div class="header">
+        <h2>Step 4</h2>
+      </div>
+      <div class="progress">
+        <ul>
+          <li class="active">Step 1</li>
+          <li class="active">Step 2</li>
+          <li class="active">Step 3</li>
+          <li class="active">Step 4</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Bottom slider -->
+<div class="sliderContent">
+  <div class="sliderItem"  id="boxSlide">
+    <div class="item step1" data-title="Checking speaker">
+      <div class="inner">
+        <h5>Speaker Info</h5>
+        <div class="content">
+          <ul>
+            <li>360° sound with 40mm driver</li>
+            <li>Diameter: 98mm</li>
+            <li>Height: 42mm</li>
+            <li>Instrument: 173g</li>
+            <li>Power adapter and cable: 75g</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="item step2" data-title="Checking power">
+      <div class="inner">
+        <h5>Power Info</h5>
+        <div class="content">
+          <ul>
+            <li>5V, 1.8A</li>
+            <li>Ports and Connectors : Micro USB Port</li>
+            <li>Power cable: 1.5m</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="item step3" data-title="Checking user guide">
+      <div class="inner">
+        <h5>User Guide</h5>
+        <div class="content">
+          <ul>
+            <li>Start Google home mini guide</li>
+            <li>Google home mini security</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="item step4" data-title="Checking user guide">
+
+    </div>
+  </div>
+</div>
+
+<!-- Loading. Detect guide -->
+<div id="loader">
+  <div class="box">
+    <p>Please scan the top of the box</p>
+  </div>
+</div>
+
+<div id="gestureGuide">
+  <div>
+    Let’s check the<br>
+    product items<br>
+    <img src="./assets/swipe-icon.svg">
+  </div>
+</div>
+<div id="introBox">
+  <div class="intro1">
+    Hello,<br>
+    welcome to<br>
+    Google Home mini!<br>
+    <!--<span class="text-style-1">G</span><span class="text-style-2">o</span><span class="text-style-3">o</span><span class="text-style-1">g</span><span class="text-style-4">l</span><span class="text-style-2">e</span> Home mini!<br>-->
+  </div>
+  <div class="intro2">
+    Let’s install<br>
+    Google Home mini!
+  </div>
+</div>
+<div class="finalStep">
+  <div>
+    1 step finished.<br>
+    Please press the Next button.<br>
+    <a href="./bottom.html">Next</a>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  let initFlag = false;
+  let checkFinal = false;
+  let checkSwipe = true;
+  $('#boxSlide').on('beforeChange', function(event, slick, direction){
+    console.log('before');
+    checkSwipe = true;
+  });
+  $('#boxSlide').on('swipe', function(event, slick, direction){
+    $.each($('#arGuide div'), (i, val) => {$(val).fadeOut(100);})
+    $($('#arGuide div')[slick.currentSlide]).fadeIn(100);
+    checkFinal = slick.currentSlide >= slick.slideCount - slick.options.slidesToShow;
+    if(checkFinal && !checkSwipe) {
+      // setFinalGuide();
+      $('.finalStep').fadeIn(100);
+    }
+  });
+
+  $('#boxSlide').on('afterChange', function(event, slick, direction){
+    checkSwipe = false;
+    console.log('after')
+  });
+
+
+
+  $('#boxSlide').on('init', function(event, slick) {
+    $('#headerSlider')
+        .addClass('on')
+        .delay(50)
+        .queue(function(next) {
+          $('#boxSlide').addClass('on');
+        });
+  });
+  function setSlider () {
+    $('#boxSlide').show();
+    $('#boxSlide').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: false,
+      dots: true,
+      asNavFor: '#headerSlider',
+      infinite: false
+    });
+    $('#headerSlider').show();
+    $('#headerSlider').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: false,
+      dots: false,
+      fade: true,
+      infinite: false,
+      asNavFor: '#boxSlide'
+    })
+  }
+  const config = {
+    "appKey": "abdc9d670bc3b103374306761da7f20f49f7f23ac57b39d012338fa849229a0f",
+    "trackerType": "PLANAR"
+  };
+
+  const app = new Letsee(config);
+  if(app !== null && typeof app !== 'undefined') {
+    app.addEventListener('trackstart', e => {
+      if(!initFlag) {
+        $('#loader').fadeOut(100);
+        $('#gestureGuide')
+                .fadeIn(500)
+                .delay(2000)
+                .fadeOut(500, () => {
+                })
+        $('#arGuide').fadeIn(100);
+        setSlider();
+        initFlag = true;
+      }
+    });
+    LetseeEngine.addEventListener('trackmove', e => {});
+    LetseeEngine.addEventListener('trackend', e => {});
+    app.addEventListener('app_status', e => {});
+  }
+
+  // Init intro screen
+  $('#introBox .intro1').delay(1000).fadeIn(500).delay(2000).fadeOut(500, () => {
+    $('#introBox .intro2').fadeIn(500, () => {
+      $('#introBox').delay(3000).fadeOut(500);
+    })
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/screenfull.js/4.2.0/screenfull.min.js"></script>
+<script>let fs=!1;document.documentElement.addEventListener("click",()=>{screenfull.enabled&&!fs&&(screenfull.request(),fs=!0)});</script>
+</body>
+</html>

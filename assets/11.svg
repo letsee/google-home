@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="825" height="825" viewBox="0 0 825 825">
+    <defs>
+        <style>
+            .cls-1{opacity:.8}.cls-2{fill:none;stroke-linejoin:round}.cls-3,.cls-4{stroke:none}.cls-4{fill:#b20000}
+        </style>
+    </defs>
+    <g id="그룹_11" data-name="그룹 11" transform="translate(-150 -905)">
+        <g id="심볼_2_21" class="cls-1" data-name="심볼 2 – 21" transform="rotate(90 447.375 1221.125)">
+            <g id="합치기_4" class="cls-2" data-name="합치기 4">
+                <path d="M1137.25-3226zm.5-.5z" class="cls-3" transform="translate(-998 3928)"/>
+                <path d="M1137.749-3226.5h144.5-144.5m-.5.499v144.501-144.501m.5-8.499h144.5a8 8 0 0 1 0 16h-137v137a8 8 0 0 1-16 0v-144.501a7.979 7.979 0 0 1 2.6-5.902 7.979 7.979 0 0 1 5.9-2.597z" class="cls-4" transform="translate(-998 3928)"/>
+            </g>
+        </g>
+        <g id="심볼_2_22" class="cls-1" data-name="심볼 2 – 22" transform="rotate(-90 658.875 1202.375)">
+            <g id="합치기_4-2" class="cls-2" data-name="합치기 4">
+                <path d="M1137.25-3226zm.5-.5z" class="cls-3" transform="translate(-998 3928)"/>
+                <path d="M1137.749-3226.5h144.5-144.5m-.5.499v144.501-144.501m.5-8.499h144.5a8 8 0 0 1 0 16h-137v137a8 8 0 0 1-16 0v-144.501a7.979 7.979 0 0 1 2.6-5.902 7.979 7.979 0 0 1 5.9-2.597z" class="cls-4" transform="translate(-998 3928)"/>
+            </g>
+        </g>
+        <g id="심볼_2_23" class="cls-1" data-name="심볼 2 – 23" transform="translate(18.75 211.5)">
+            <g id="합치기_4-3" class="cls-2" data-name="합치기 4">
+                <path d="M1137.25-3226zm.5-.5z" class="cls-3" transform="translate(-998 3928)"/>
+                <path d="M1137.749-3226.5h144.5-144.5m-.5.499v144.501-144.501m.5-8.499h144.5a8 8 0 0 1 0 16h-137v137a8 8 0 0 1-16 0v-144.501a7.979 7.979 0 0 1 2.6-5.902 7.979 7.979 0 0 1 5.9-2.597z" class="cls-4" transform="translate(-998 3928)"/>
+            </g>
+        </g>
+        <g id="심볼_2_24" class="cls-1" data-name="심볼 2 – 24" transform="rotate(180 553.125 1211.75)">
+            <g id="합치기_4-4" class="cls-2" data-name="합치기 4">
+                <path d="M1137.25-3226zm.5-.5z" class="cls-3" transform="translate(-998 3928)"/>
+                <path d="M1137.749-3226.5h144.5-144.5m-.5.499v144.501-144.501m.5-8.499h144.5a8 8 0 0 1 0 16h-137v137a8 8 0 0 1-16 0v-144.501a7.979 7.979 0 0 1 2.6-5.902 7.979 7.979 0 0 1 5.9-2.597z" class="cls-4" transform="translate(-998 3928)"/>
+            </g>
+        </g>
+    </g>
+</svg>
