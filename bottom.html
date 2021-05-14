@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>Letsee AR Manual Demo - Google Home Mini</title>
     <meta content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no, viewport-fit=cover" name="viewport" />
-    <!--<script src="/letsee.js"></script>-->
     <script src="letsee.js"></script>
+    <!--<script src="https://developer.letsee.io/api/webar?key=f7e5493e97c65af170b54706afcfcf6ab2a3e729d7bffd460ef734e2c9d3bff1"></script>-->
     <!--<script src="https://intra.letsee.io:10002/dist/letsee.js"></script>-->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.min.css"/>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
+    <!-- 아르코 마커를 등록하는 부분 -->
     <style media="place" type="text/css">
         #clickGuide {
             -letsee-target: uri('top-marker.json');
@@ -28,14 +29,15 @@
     </style>
 </head>
 <body>
-
+<!--  AR 증강화면에 마커가 트렉킹 되지 않았을때 나오는 마커를 트랙킹해주세요 의미의 화면 HTML -->
 <div id="markerLoader">
     <div class="box">
         <img src="./assets/marker.svg" id="topMarker">
         <img src="./assets/recognize-marker-signal.svg" id="bottomMarker">
     </div>
 </div>
-
+<!-- TOP marker와 함께 증강되는 클릭 가이드 컴포넌트. 볼륨업과 다운의 이벤트 처리를 발생시키는 컴포넌트 이다.-->
+<!-- 해당 영역은 html renderer 내부로 이동 되어, 마커를 따라 다님.  currentSlide0 일때 증강 -->
 <div id="clickGuide">
     <div id="leftHand" class="inner">
         <img src="./assets/hand-left-up.svg" class="up">
@@ -46,11 +48,10 @@
         <img src="./assets/hand-right-down.svg" class="down">
     </div>
 </div>
-
+<!-- clickGuide와 함께 증강되는 마커부분의 컴포넌트. 볼륨업과 다운 이벤트가 발생하면 볼륨이미지를 변경 하여 준다. -->
+<!-- 해당 영역은 html renderer 내부로 이동 되어, 마커를 따라 다님.  currentSlide0 일때 증강 -->
 <div id="topGuide">
-
     <div class="guideCircle">
-
         <div class="text"><span>Tap Left</span></div>
         <div class="volume">
             <img src="./assets/volume-1.svg" class="vol1">
@@ -61,16 +62,25 @@
         <div class="rightBtn"></div>
     </div>
 </div>
+<!-- 바닥면 아르코 마커를 인식했을때 나오는 컨텐츠 -->
+<!-- 해당 영역은 html renderer 내부로 이동 되어, 마커를 따라 다님.  currentSlide1 일때 증강 -->
+<!-- reset mike가 함께 증강되고 power usb가 함께 증강된다. -->
 <div id="bottomGuide">
     <div class="step1">
+        <!-- 슬라이드 3번째 -->
         <div class="reset">Reset Button</div>
         <div class="mike">Mike switch</div>
+        <!-- 슬라이드 4번째 -->
         <div class="power">Power</div>
         <div class="usb"><img src="./assets/usb-02.png" alt="USB Power"></div>
     </div>
 </div>
 <!-- Title in header -->
+<!-- 슬라이드의 헤더에 해당하는 정보를 각슬라이드마다 Html 형태로 모두 기록되어 있어 길다.-->
+<!-- item class는 한 슬라이드 한칸을 의미 하며 progress class는 헤더 아래쪽 진행상태를 나타넨다.-->
+<!-- active class는 슬라이드바의 진행상태를 파란색으로 변경 시켜주는 역활-->
 <header>
+    <!-- 아르코 상단 마커용 -->
     <div id="topHeaderSlider">
         <div class="item">
             <div class="header">
@@ -99,6 +109,7 @@
             </div>
         </div>
     </div>
+    <!-- 아르코 마커 하단 마커용 -->
     <div id="bottomHeaderSlider">
         <div class="item">
             <div class="header">
@@ -199,15 +210,20 @@
 
 
 <script type="text/javascript">
-
+    // 탑 메뉴가 열려있는지의 플레그
     let initTopFlag = false;
     let checkTopFinal = false;
     let checkTopSwipe = true;
+    // 현재의 스텝
+    // 오해 할수 있는대, 슬라이드가 앞에 두개는 전반부 뒤에 두개는 후반부 이다.
+    // currentStep 이 0 일때는 상단 마커에 대한 내용이 노출되고, 1일경우에는 바텀 마커에 대한 내용이 노출된다.
     let currentStep = 0;
+    // 슬라이드가 체인지 이벤트. 변경 이전
     $('#topSlide').on('beforeChange', function(event, slick, direction){
         console.log('before');
         checkTopSwipe = true;
     });
+    // 스와이프 이벤트
     $('#topSlide').on('swipe', function(event, slick, direction){
         checkTopFinal = slick.currentSlide >= slick.slideCount - slick.options.slidesToShow;
         if(checkTopFinal && !checkTopSwipe) {
@@ -216,14 +232,18 @@
         if (slick.currentSlide === 1) setRightBtn();
         if (slick.currentSlide === 0) setLeftBtn();
     });
+    // 슬라이드 변경 이벤트
     $('#topSlide').on('afterChange', function(event, slick, direction){
         checkTopSwipe = false;
         console.log('after')
     });
+    // 슬라이드 생성 이벤트의 콜백
     $('#topSlide').on('init', function(event, slick) {
         $('#topHeaderSlider')
             .addClass('on');
     });
+    // slick js init
+    // 탑 슬라이드의 slick init
     function setTopSlider () {
         $('#topHeaderSlider').show().css('visibility', 'visible');;
         $('#topHeaderSlider').slick({
@@ -249,15 +269,19 @@
     let initBottomFlag = false;
     let checkBottomFinal = false;
     let checkBottomSwipe = true;
+    // 바텀 슬라이드 변경 이벤트
     $('#bottomSlide').on('beforeChange', function(event, slick, direction){
         console.log('before');
         checkBottomSwipe = true;
     });
+    // 바텀 슬라이드 스와이프 이벤트
     $('#bottomSlide').on('swipe', function(event, slick, direction){
         checkBottomFinal = slick.currentSlide >= slick.slideCount - slick.options.slidesToShow;
+        // 마지막일 경우 구글 링크를 노출
         if(checkBottomFinal && !checkBottomSwipe) {
             $('.finalStep#bottom').fadeIn(100).css('visibility','visible');
         }
+        // currentSlide가 1일경우 바닥쪽 아르코 마커에 대한 처리, currentSlide가 0 일경우에는 윗쪽 아르코 마커에 대한 처리
         if (slick.currentSlide === 1) {
             $('#bottomGuide .reset').hide();
             $('#bottomGuide .mike').hide();
@@ -271,6 +295,7 @@
             $('#bottomGuide .power').hide();
         }
     });
+    // 슬라이드 변경 이후의 이벤트
     $('#bottomSlide').on('afterChange', function(event, slick, direction){
         checkBottomSwipe = false;
         console.log('after')
@@ -283,6 +308,7 @@
                 // $('#bottomSlide').addClass('on');
             });
     });
+    // 바텀 아르코 마커에 대한 슬라이드 생성
     function setBottomSlider () {
         $('#bottomSlide').show();
         $('#bottomSlide').slick({
@@ -305,9 +331,15 @@
         })
     }
     // setBottomSlider();
+
+    // leftBtn 이벤트 제어에 대한 플레그
     let leftBtnFlag = false;
+    // rightBtn 이벤트 제어에 대한 플레그
     let rightBtnFlag = false;
+    // 볼륨값.
+    // 해당 값에 따라 마커에 증강되는 볼륨이미지가 변경된다.
     let currentVol = 2;
+    // 볼륨을 표시하는 element
     let volEle = $('.volume img');
 
     function setSliderPosition() {
@@ -321,7 +353,7 @@
             clearTimeout(timer);
         }, 1500);
     });
-
+    // 라이트 버튼 설정 이벤트 처리
     function setRightBtn() {
         rightBtnFlag = false;
         $('.guideCircle .text').html('Tap Right');
@@ -331,6 +363,7 @@
         $('.rightBtn').show();
         $('#rightHand').show();
     }
+    // 레프트 버튼 설정 이벤트 처리
     function setLeftBtn() {
         leftBtnFlag = false;
         $('.guideCircle .text').html('Tap Left');
@@ -340,7 +373,7 @@
         $('.rightBtn').hide();
         $('#rightHand').hide();
     }
-
+    // 가이드 텍스트의 변경 처리 ( 윗쪽 아르코 마커 일때 )
     function toggleGuideText(state) {
         if(state) {
             $('.guideCircle .text').fadeOut(500);
@@ -355,6 +388,7 @@
         }
 
     }
+    // 볼륭 증가 이벤트 처리
     function volUp() {
         if (!rightBtnFlag) {
             rightBtnFlag = true;
@@ -370,6 +404,7 @@
             console.log('max')
         }
     }
+    // 볼륨 감소 이벤트 처리
     function volDown() {
         if (!leftBtnFlag) {
             leftBtnFlag = true;
@@ -391,9 +426,7 @@
     $('.rightBtn').click(()=>{
         volUp();
     })
-
     let slideFlag = false;
-
     $('#gotoStep3').click(function(e) {
         e.preventDefault();
         setNextSlide();
@@ -421,17 +454,14 @@
         var userAgent = navigator.userAgent || navigator.vendor || window.opera;
         let andLink = 'https://play.google.com/store/apps/details?id=com.google.android.apps.chromecast.app'
         let iosLink = 'https://itunes.apple.com/gb/app/google-home/id680819774'
-
         // Windows Phone must come first because its UA also contains "Android"
         if (/windows phone/i.test(userAgent)) {
             return "window";
         }
-
         if (/android/i.test(userAgent)) {
             $('#appLinkAddress').attr('href',andLink)
             return "android";
         }
-
         // iOS detection from: http://stackoverflow.com/a/9039885/177710
         if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
             $('#appLinkAddress').attr('href',iosLink)
@@ -440,35 +470,36 @@
         return "unknown";
     }
     getMobileOperatingSystem();
+    // 아르코 마커를 사용하기 위한 trackertype설정
     const config = {
         trackerType: 'marker'
     };
-
+    // 렛시 loading
     letsee.init(config);
+    // 로딩에 대한 콜백
     letsee.ready(() => {
         console.warn('test');
+        // 엔진 스타트
         letsee.start();
+        // 마커 트렉킹이 시작 되었을때 반환되는 이벤트
         letsee.onTrackStart((e) => {
-            /*console.log('e.trace.entity',e.trace.entity);*/
-            // e.trace.entity = 'https://intra.letsee.io:10005/google-home/bottom-marker.json';
-            // e.trace.entity = 'https://intra.letsee.io:10005/google-home/top-marker.json';
             const traceEntity = e.trace.entity;
             $('#markerLoader').hide();
+            // top-marker가 트렉킹 되엇을때의 처리 ( 슬라이드 이닛플레그는 최초에만 false )
             if(traceEntity.indexOf('top-marker.json' > 0 ) && !initTopFlag){
                 setTopSlider();
                 initTopFlag = true;
             }
-
+            // bottom-marker가 트랙킹 되엇을때의 처리 ( 슬라이드 이닛플레그는 최초에만 false )
             if (!initBottomFlag &&  traceEntity.indexOf('bottom-marker.json') > 0) {
                 $('#bottomSlide').addClass('on');
                 initBottomFlag = true;
             }
-
             let uri = e.trace.entity;
-            // uri = 'https://intra.letsee.io:10005/google-home/top-marker.json';
-            // uri = 'https://intra.letsee.io:10005/google-home/bottom-marker.json';
-            // e.trace.entity = 'https://intra.letsee.io:10005/google-home/top-marker.json';
             if (uri.indexOf('top-marker.json') > -1) {
+                // 기존 로직에 현재 버전의 SDK를 적용 하였을 경우,
+                // 트렉킹이 종료되었을때, 모델이 바로앞에 붙어 있는 경우가 존재함.
+                // display를 엔진이 기동하며 제어하기 때문에, visibility속성을 이용하여 모델을 안보이게 처리
                 $('#topGuide').css('visibility','visible');
                 $('#clickGuide').css('visibility','visible');
                 $('#bottomGuide').css('visibility','hidden');
@@ -497,13 +528,14 @@
                     $('#topGuide').css('visibility','hidden');
                     $('#clickGuide').css('visibility','hidden');
                 }
-                // $('#bottomGuide').show().css('visibility' , 'visible' );
             }
         });
+        // 렛시의 엔진에서 트랙킹 대상이 움직일때 발생하는 이벤트
         letsee.onTrackMove((e) => {
-            // console.log('e.trace.entity', e.trace.entity );
-            $('#markerLoader').show().css('visibility' , 'hidden');
+            // 증강이 게속 될경우 로더가 사라지지 않는 경우가 발생.
+            $('#markerLoader').css('visibility' , 'hidden');
         });
+        // 카메라에서 마커를 잃어 버렸을때 발생하는 이벤트
         letsee.onTrackEnd(() => {
             $('#markerLoader').show().css('visibility' , 'visible');
             $('#bottomGuide').css('visibility','hidden');
