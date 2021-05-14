@@ -51,7 +51,7 @@ table {
 
 
 /* VAR */
-$AR-SIZE: 230px;
+$AR-SIZE: 30px;
 
 
 body {
@@ -114,6 +114,7 @@ ul.slick-dots {
   background: none;
   background-size: contain;
   padding: 2px;
+  z-index: 101;
   .box {
     background: url('../assets/product_guide.png') no-repeat center center;
     width: 100%;
@@ -139,6 +140,7 @@ ul.slick-dots {
   background-size: contain;
   padding: 2px;
   display: none;
+  z-index: 101;
   > div {
     display: none;
     position: absolute;
@@ -220,6 +222,7 @@ header {
   text-align: center;
   color: #fff;
   font-size: 20px;
+  z-index: 101;
   #headerSlider,
   #topHeaderSlider,
   #bottomHeaderSlider {
@@ -288,6 +291,7 @@ header {
   -o-transition: all 500ms ease-in-out;
   transition: all 500ms ease-in-out;
   display: none;
+  z-index: 101;
   &.on {
     transform: translateY(0%);
     opacity: 1;
@@ -320,7 +324,9 @@ header {
     }
   }
 }
+
 #bottomSlide {
+  z-index: 101;
   .inner {
   }
   .content {
@@ -362,6 +368,7 @@ header {
 #topSlide,
 #bottomSlide {
   height: 200px;
+  z-index: 101;
   //bottom: -30px;
 }
 
@@ -377,6 +384,7 @@ header {
   color: #ffffff;
   background: #488d4a;
   text-shadow: 1px 1px 6px rgba(0,0,0, 0.3);
+  z-index: 101;
   > div {
     width: 100%;
     position: absolute;
@@ -429,12 +437,12 @@ header {
   background-color: rgba(71, 136, 224, 0.8);
   text-shadow: 1px 1px 6px rgba(0,0,0, 0.3);
   display: none;
+  z-index: 101;
   > div {
     width: 100%;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-
   }
   img {
     width: 57px;
@@ -452,6 +460,7 @@ header {
   color: #ffffff;
   background-color: rgba(71, 136, 224, 0.8);
   display: none;
+  z-index: 101;
   > div {
     width: 100%;
     position: absolute;
@@ -483,6 +492,7 @@ header {
   }
 }
 #applink {
+  z-index: 101;
   position: fixed;
   width: 100%;
   height: 100%;
@@ -523,6 +533,7 @@ header {
 }
 
 #bottom-nav {
+  z-index: 101;
   position: absolute;
   bottom: 0%;
   width: 100%;
@@ -612,27 +623,28 @@ header {
 
 /************** Top Manual */
 #topGuide {
+  z-index: 101;
   width: $AR-SIZE;
   height: $AR-SIZE;
   position: absolute;
+  display:none;
   //left: 50%;
   //top: 50%;
   //transform: translate(-50%, -50%);
   border-radius: 100%;
-  overflow: hidden;
   display: none;
   /*border: 1px solid #f00;*/
   .guideCircle {
     width: $AR-SIZE;
     height: $AR-SIZE;
-    overflow: hidden;
+
     border-radius: 100%;
     position: relative;
     .text {
       text-align: center;
       color: #588153;
-      width: 85px;
-      height: 85px;
+      width: $AR-SIZE;
+      height: $AR-SIZE;
       background: #fff;
       background-size: contain;
       position: absolute;
@@ -640,10 +652,13 @@ header {
       top: 50%;
       transform: translate(-50%, -50%);
       border-radius: 10px;
-      line-height: 115px;
-      span {}
+      line-height: 30px;
+      span {
+        width:50px !important;
+        font-size:2px !important;
+        display: block;
+      }
     }
-
     .leftBtn,
     .rightBtn {
       width: $AR-SIZE;
@@ -667,8 +682,8 @@ header {
     }
   }
   .volume {
-    width: 85px;
-    height: 85px;
+    width: $AR-SIZE;
+    height: $AR-SIZE;
     background: #fff url('../assets/volume.svg') no-repeat center center ;
     background-size: contain;
     position: absolute;
@@ -689,6 +704,7 @@ header {
 }
 
 #bottomGuide {
+  z-index: 101;
   width: $AR-SIZE;
   height: $AR-SIZE;
   position: absolute;
@@ -722,26 +738,27 @@ header {
         left: 3px;
         top: -21px;
       }
+
       &.reset {
-        left: 97px;
-        top: 174px;
+        left: -2px;
+        top:28px;
         &:after {
           content: "1";
         }
       }
       &.mike {
-        left: 175px;
-        top: 180px;
+        left: 31px;
+        top: 41px;
         &:after {
           content: '2';
         }
       }
       &.power {
         display: none;
-        left: 87px;
-        top: 198px;
-        width: 50px;
-        height: 50px;
+        left: 5px;
+        top: 50px;
+        width: 20px;
+        height: 20px;
       }
       @-webkit-keyframes usb {
         0%   { transform: translateY(150%); }
@@ -767,9 +784,9 @@ header {
         display: none;
         text-indent: 0px;
         border: none;
-        left: 80px;
-        bottom: -30px;
-        width: 60px;
+        left: 2px;
+        bottom: -50px;
+        width: 30px;
         transform: translateY(150%);
         animation-timing-function: ease-in-out;
         -webkit-animation: usb 2s infinite; /* Safari 4+ */
@@ -785,6 +802,7 @@ header {
 }
 
 #markerLoader {
+  z-index: 101;
   height: 60%;
   position: absolute;
   left: 50%;
@@ -827,14 +845,19 @@ header {
   100% { opacity: 0; }
 }
 
+#ls_html-renderers{
+
+}
+
 #clickGuide {
+  z-index: 101;
   //position: absolute;
   //top: 65%;
   //left: 50%;
-  //transform: translate(-50%, -50%);
+  /*transform: translate(-50%, -50%);*/
   //width: 100%;
   //height: 95px;
-
+  display: none;
   position: absolute;
   //top: 65%;
   //left: 50%;
@@ -882,6 +905,11 @@ header {
   #markerLoader {
     width: 60%;
   }
+}
+
+
+#clickGuide, #topGuide, #bottomGuide {
+  visibility: hidden;
 }
 
 

@@ -1,11 +1,8 @@
 {
 	"uri":"top-marker.json",
-	"letseeMarkerId": "marker_0",
-	"name":"Google home mini box manual",
-	"size":{
-		"width": 80,
-		"height": 80
-	},
-	"scale": 1,
-	"information":{}
+	"letseeMarkerId": "0",
+	"physicalSize":{
+		"width": 30,
+		"height": 30
+	}
 }

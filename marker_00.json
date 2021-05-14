@@ -1,11 +1,8 @@
 {
 	"uri":"marker_00.json",
-  "letseeMarkerId": "marker_0",
-	"name":"QR Ccode TEST",
-	"size":{
+    "letseeMarkerId": "0",
+	"physicalSize":{
 		"width": 30,
 		"height": 30
-	},
-	"scale": 1,
-	"information":{}
+	}
 }

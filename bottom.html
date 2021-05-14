@@ -4,27 +4,26 @@
     <meta charset="UTF-8">
     <title>Letsee AR Manual Demo - Google Home Mini</title>
     <meta content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no, viewport-fit=cover" name="viewport" />
-    <script src="https://s3.ap-northeast-2.amazonaws.com/letsee-dev/webar/Letsee.0.9.10.min.js"></script>
+    <!--<script src="/letsee.js"></script>-->
+    <script src="letsee.js"></script>
+    <!--<script src="https://intra.letsee.io:10002/dist/letsee.js"></script>-->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css"/>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.min.css"/>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.min.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <style media="place" type="text/css">
         #clickGuide {
             -letsee-target: uri('top-marker.json');
-            -letsee-position: coords(0, -30, 0);
         }
         #topGuide {
             -letsee-target: uri('top-marker.json');
-            -letsee-position: coords(0, 0, 0);
         }
         #bottomGuide {
             -letsee-target: uri('bottom-marker.json');
-            -letsee-position: coords(0, 0, 0);
         }
     </style>
 </head>
@@ -200,6 +199,7 @@
 
 
 <script type="text/javascript">
+
     let initTopFlag = false;
     let checkTopFinal = false;
     let checkTopSwipe = true;
@@ -222,10 +222,10 @@
     });
     $('#topSlide').on('init', function(event, slick) {
         $('#topHeaderSlider')
-            .addClass('on')
+            .addClass('on');
     });
     function setTopSlider () {
-        $('#topHeaderSlider').show();
+        $('#topHeaderSlider').show().css('visibility', 'visible');;
         $('#topHeaderSlider').slick({
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -235,7 +235,7 @@
             infinite: false,
             asNavFor: '#topSlide'
         })
-        $('#topSlide').show();
+        $('#topSlide').show().css('visibility', 'visible');;
         $('#topSlide').slick({
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -244,12 +244,8 @@
             asNavFor: '#topHeaderSlider',
             infinite: false
         });
-
     }
     // setTopSlider();
-
-
-
     let initBottomFlag = false;
     let checkBottomFinal = false;
     let checkBottomSwipe = true;
@@ -260,7 +256,7 @@
     $('#bottomSlide').on('swipe', function(event, slick, direction){
         checkBottomFinal = slick.currentSlide >= slick.slideCount - slick.options.slidesToShow;
         if(checkBottomFinal && !checkBottomSwipe) {
-            $('.finalStep#bottom').fadeIn(100);
+            $('.finalStep#bottom').fadeIn(100).css('visibility','visible');
         }
         if (slick.currentSlide === 1) {
             $('#bottomGuide .reset').hide();
@@ -309,7 +305,6 @@
         })
     }
     // setBottomSlider();
-
     let leftBtnFlag = false;
     let rightBtnFlag = false;
     let currentVol = 2;
@@ -326,7 +321,6 @@
             clearTimeout(timer);
         }, 1500);
     });
-
 
     function setRightBtn() {
         rightBtnFlag = false;
@@ -375,13 +369,12 @@
         } else {
             console.log('max')
         }
-
     }
     function volDown() {
         if (!leftBtnFlag) {
             leftBtnFlag = true;
             toggleGuideText(true);
-            $('#topSlide').addClass('on');
+            $('#topSlide').addClass('on').css('visibility','visible');
         }
         if(currentVol >= 0) {
             let targetVolume = volEle[currentVol];
@@ -448,26 +441,37 @@
     }
     getMobileOperatingSystem();
     const config = {
-        "appKey": "abdc9d670bc3b103374306761da7f20f49f7f23ac57b39d012338fa849229a0f",
-        "trackerType": "MARKER"
+        trackerType: 'marker'
     };
 
-    const app = new Letsee(config);
-    if(app !== null && typeof app !== 'undefined') {
-        LetseeEngine.addEventListener('trackstart', e => {
+    letsee.init(config);
+    letsee.ready(() => {
+        console.warn('test');
+        letsee.start();
+        letsee.onTrackStart((e) => {
+            /*console.log('e.trace.entity',e.trace.entity);*/
+            // e.trace.entity = 'https://intra.letsee.io:10005/google-home/bottom-marker.json';
+            // e.trace.entity = 'https://intra.letsee.io:10005/google-home/top-marker.json';
+            const traceEntity = e.trace.entity;
             $('#markerLoader').hide();
-            if(!initTopFlag) {
+            if(traceEntity.indexOf('top-marker.json' > 0 ) && !initTopFlag){
                 setTopSlider();
                 initTopFlag = true;
-            };
-            if (!initBottomFlag &&  e.target.uri === 'bottom-marker.json') {
+            }
+
+            if (!initBottomFlag &&  traceEntity.indexOf('bottom-marker.json') > 0) {
                 $('#bottomSlide').addClass('on');
                 initBottomFlag = true;
             }
-        });
-        LetseeEngine.addEventListener('trackmove', e => {
-            const uri = e.target.uri;
-            if (uri === 'top-marker.json') {
+
+            let uri = e.trace.entity;
+            // uri = 'https://intra.letsee.io:10005/google-home/top-marker.json';
+            // uri = 'https://intra.letsee.io:10005/google-home/bottom-marker.json';
+            // e.trace.entity = 'https://intra.letsee.io:10005/google-home/top-marker.json';
+            if (uri.indexOf('top-marker.json') > -1) {
+                $('#topGuide').css('visibility','visible');
+                $('#clickGuide').css('visibility','visible');
+                $('#bottomGuide').css('visibility','hidden');
                 if(currentStep === 0)
                 {
                     $('#topGuide').show();
@@ -483,29 +487,31 @@
                     $('#bottomMarker').hide();
                 }
             }
-            if (uri === 'bottom-marker.json') {
+            if (uri.indexOf('bottom-marker.json') > -1) {
                 if (currentStep === 1) {
-                    $('#topGuide').hide();
-                    $('#clickGuide').hide();
-                    $('#topMarker').hide();
-                    $('#bottomGuide').show();
-                    $('#bottomMarker').hide();
+                    $('#bottomGuide').css('visibility','visible');
+                    $('#topGuide').css('visibility','hidden');
+                    $('#clickGuide').css('visibility','hidden');
                 } else {
-                    $('#topGuide').hide();
-                    $('#clickGuide').hide();
-                    $('#topMarker').show();
-                    $('#bottomGuide').hide();
-                    $('#bottomMarker').hide();
+                    $('#bottomGuide').css('visibility','visible');
+                    $('#topGuide').css('visibility','hidden');
+                    $('#clickGuide').css('visibility','hidden');
                 }
+                // $('#bottomGuide').show().css('visibility' , 'visible' );
             }
         });
-        LetseeEngine.addEventListener('trackend', e => {
-            $('#markerLoader').show();
+        letsee.onTrackMove((e) => {
+            // console.log('e.trace.entity', e.trace.entity );
+            $('#markerLoader').show().css('visibility' , 'hidden');
         });
-        app.addEventListener('app_status', e => {
-            console.log(e)
+        letsee.onTrackEnd(() => {
+            $('#markerLoader').show().css('visibility' , 'visible');
+            $('#bottomGuide').css('visibility','hidden');
+            $('#topGuide').css('visibility','hidden');
+            $('#clickGuide').css('visibility','hidden');
         });
-    }
+    });
+
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/screenfull.js/4.2.0/screenfull.min.js"></script>
 <script>let fs=!1;document.documentElement.addEventListener("click",()=>{screenfull.enabled&&!fs&&(screenfull.request(),fs=!0)});</script>
